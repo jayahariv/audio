@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# misc 
+.DS_Store
+
+# sample(audio/video/extracted data.. etc)
+sample/
