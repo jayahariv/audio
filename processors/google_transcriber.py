@@ -1,4 +1,4 @@
-from base_transcriber import BaseTranscriber
+from processors.base_transcriber import BaseTranscriber
 import speech_recognition as sr
 
 class GoogleSpeechTranscriber(BaseTranscriber):

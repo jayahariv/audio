@@ -51,9 +51,9 @@ This project processes audio and video files to extract audio, preprocess it, an
    // copy the audio/video files in the root directory of the project. 
    mkdir sample
    cd sample 
-   copy path/to/mp4 sample/
+   cp path/to/mp4 sample/
 
-   python main.py sample/filename.mp4
+   python main.py -f sample/filename.mp4 -s artpark -o path/to/transcript.txt
    ```
 
 2. **API Endpoints**:
