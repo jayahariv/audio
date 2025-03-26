@@ -3,3 +3,5 @@ scipy
 moviepy
 SpeechRecognition
 numpy
+torch
+transformers

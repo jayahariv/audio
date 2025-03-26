@@ -2,6 +2,7 @@
 import os
 import numpy as np
 import librosa
+import subprocess
 from scipy.io.wavfile import write
 
 def preprocess_audio(input_file, output_dir, target_sr=16000, duration=30):
@@ -45,15 +46,25 @@ def preprocess_audio(input_file, output_dir, target_sr=16000, duration=30):
             # write(output_file, target_sr, segment.astype(np.float32))  # Save as WAV file
             # print(f"Extracted and processed: {output_file}")
             
-            boosted_audio_file = os.path.join(output_dir, f"bas{start_time // duration + 1}.wav")
+            boosted_audio_file = os.path.join(output_dir, f"audio{start_time // duration + 1}.wav")
             boost_audio(segment, boosted_audio_file)  # Boost and save
             print(f"Boosted audio saved: {boosted_audio_file}")
+            
+            directory, original_filename = os.path.split(boosted_audio_file)
+            name, extension = os.path.splitext(original_filename)
+            filename = f"final_{name}{extension}"
+            try: 
+                wav_file_path = os.path.join(directory, filename)
+                subprocess.run(['ffmpeg', '-i', boosted_audio_file, '-acodec', 'pcm_s16le', '-ar', '16000', wav_file_path], check=True)
+            except subprocess.CalledProcessError as e:
+                return f"Error converting file: {e}"
+            finally:
+                if os.path.exists(boosted_audio_file): 
+                    os.remove(boosted_audio_file)
         
         return output_dir
     except Exception as e:
         print(f"Error extracting audio: {e}")
-    finally:
-        print("finished")
 
 def boost_audio(audio_data, output_file):
     """

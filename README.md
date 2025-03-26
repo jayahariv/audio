@@ -76,7 +76,7 @@ This project processes audio and video files to extract audio, preprocess it, an
 audio_video_processor/
 ├── audio_processor.py   # Handles audio preprocessing tasks
 ├── video_processor.py   # Handles video processing tasks
-├── transcriber.py       # Handles audio transcription
+├── processors           # These are different processors we can use, like Whisper, Google Speech etc.
 ├── main.py              # Main entry point of the application
 ├── requirements.txt     # List of dependencies
 ├── LICENSE              # License
